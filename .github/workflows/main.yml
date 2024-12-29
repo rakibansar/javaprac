@@ -15,9 +15,12 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Set up JDK
-      uses: actions/setup-java@v3
-      with:
-        java-version: '23' # Use Java 23
+  uses: actions/setup-java@v3
+  with:
+    java-version: 23
+    distribution: 'eclipse ' 
+    # or 'adopt' or 'liberica' or 'eclipse' depending on your preference
+    # ... other options as before ...
 
     - name: Build with Maven
       run: |
