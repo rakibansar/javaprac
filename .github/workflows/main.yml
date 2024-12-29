@@ -1,4 +1,4 @@
-name: Java CI/CD Workflow
+name: Java CI/CD Workflow (Without Maven)
 
 on:
   push:
@@ -18,34 +18,9 @@ jobs:
       uses: actions/setup-java@v3
       with:
         java-version: '11' # Use Java 11 or your preferred version
-        distribution: 'temurin' # Use a supported distribution
+        distribution: 'temurin' 
 
-    - name: Build with Maven
+    - name: Run Java Application
       run: |
-        mvn clean install
-
-    - name: Run Tests with Maven
-      run: |
-        mvn test 
-
-    - name: Upload Test Results
-      uses: actions/upload-artifact@v3
-      with:
-        name: test-results
-        path: target/surefire-reports
-
-    - name: Generate JUnit Reports
-      run: |
-        mvn surefire-report:report
-
-    - name: Upload JUnit Reports
-      uses: actions/upload-artifact@v3
-      with:
-        name: junit-reports
-        path: target/surefire-reports
-
-    - name: Publish Test Results
-      uses: EnricoMi/publish-unit-test-result-action@v1
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        path: target/surefire-reports
+        javac *.java 
+        java MainClass # Replace MainClass with the name of your main class
