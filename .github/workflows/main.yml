@@ -17,10 +17,12 @@ jobs:
     - name: Set up JDK
       uses: actions/setup-java@v3
       with:
-        java-version: '11' # Use Java 11 or your preferred version
+        java-version: '23' # Use Java 11 or your preferred version
         distribution: 'temurin' 
-
     - name: Run Java Application
       run: |
-        javac *.java 
-        java MainClass # Replace MainClass with the name of your main class
+       cd path/to/your/java/source/files 
+       javac *.java 
+       java MainClass
+       working-directory: ./src/main/java # Adjust the path as needed
+ 
