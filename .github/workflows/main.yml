@@ -15,12 +15,11 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Set up JDK
-  uses: actions/setup-java@v3
-  with:
-    java-version: 23
-    distribution: 'eclipse ' 
-    # or 'adopt' or 'liberica' or 'eclipse' depending on your preference
-    # ... other options as before ...
+      uses: actions/setup-java@v3
+      with:
+        java-version: '23'
+        distribution: 'eclipse' 
+        check-latest: true 
 
     - name: Build with Maven
       run: |
@@ -49,5 +48,5 @@ jobs:
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action@v1
       with:
-        github-token: ${{ secrets.TOKEN }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
         path: target/surefire-reports
