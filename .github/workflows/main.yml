@@ -1,10 +1,10 @@
-name: Selenium Tests with TestNG
+name: Java CI/CD Workflow
 
 on:
   push:
-    branches: [ "main" ] # Run tests on pushes to the 'main' branch
+    branches: [ "main" ] # Trigger on pushes to the 'main' branch
   pull_request:
-    branches: [ "main" ] # Run tests on pull requests to the 'main' branch
+    branches: [ "main" ] # Trigger on pull requests to the 'main' branch
 
 jobs:
   build:
@@ -17,13 +17,14 @@ jobs:
     - name: Set up JDK
       uses: actions/setup-java@v3
       with:
-        java-version: '23'
-        distribution: 'temurin' 
-        check-latest: true 
+        java-version: '11' # Use Java 11 or your preferred version
+        distribution: 'temurin' # Use a supported distribution
 
-    
+    - name: Build with Maven
+      run: |
+        mvn clean install
 
-    - name: Run Tests with TestNG
+    - name: Run Tests with Maven
       run: |
         mvn test 
 
@@ -31,7 +32,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: test-results
-        path: target/surefire-reports 
+        path: target/surefire-reports
 
     - name: Generate JUnit Reports
       run: |
@@ -41,7 +42,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: junit-reports
-        path: target/surefire-reports/
+        path: target/surefire-reports
 
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action@v1
